@@ -2,87 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 48 100% 88%;
+    --foreground: 210 100% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 100% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 100% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 207 100% 26%;
+    --primary-foreground: 48 100% 88%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 100% 15%;
+    --secondary-foreground: 48 100% 88%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 48 50% 80%;
+    --muted-foreground: 210 50% 35%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 48 100% 70%;
+    --accent-foreground: 210 100% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 207 40% 70%;
+    --input: 207 40% 85%;
+    --ring: 207 100% 26%;
+
+    --radius: 1rem;
+
+    /* Game-specific tokens */
+    --life-full: 0 84% 60%;
+    --life-empty: 0 10% 80%;
+    --locked: 210 20% 70%;
+    --unlocked: 142 76% 36%;
+    --gold: 45 93% 47%;
+    --bronze: 30 60% 50%;
+    --silver: 0 0% 70%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(207, 100%, 26%) 0%, hsl(210, 100%, 15%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(142, 70%, 28%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45, 93%, 47%) 0%, hsl(38, 92%, 50%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(48, 50%, 96%) 100%);
+
+    /* Shadows */
+    --shadow-game: 0 4px 0 hsl(210, 100%, 15%);
+    --shadow-button: 0 4px 0 hsl(207, 100%, 18%);
+    --shadow-card: 0 8px 24px -4px hsl(210, 100%, 15%, 0.15);
+    --shadow-elevated: 0 12px 32px -8px hsl(210, 100%, 15%, 0.2);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 210 100% 10%;
+    --foreground: 48 100% 88%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 80% 15%;
+    --card-foreground: 48 100% 88%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 80% 15%;
+    --popover-foreground: 48 100% 88%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 48 100% 70%;
+    --primary-foreground: 210 100% 15%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 207 100% 26%;
+    --secondary-foreground: 48 100% 88%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 50% 25%;
+    --muted-foreground: 48 50% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 207 100% 26%;
+    --accent-foreground: 48 100% 88%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 210 50% 25%;
+    --input: 210 50% 25%;
+    --ring: 48 100% 70%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +116,110 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-nunito antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-fredoka;
+  }
+}
+
+@layer utilities {
+  .game-shadow {
+    box-shadow: var(--shadow-game);
+  }
+
+  .button-shadow {
+    box-shadow: var(--shadow-button);
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .elevated-shadow {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+}
+
+@layer components {
+  .game-button {
+    @apply relative font-fredoka font-semibold tracking-wide transition-all duration-150;
+    transform: translateY(0);
+  }
+
+  .game-button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+
+  .game-card {
+    @apply rounded-2xl bg-card border-2 border-primary/20 card-shadow;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.5);
+    }
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .bounce-in {
+    animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .shake {
+    animation: shake 0.4s ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
   }
 }
