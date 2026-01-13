@@ -23,7 +23,6 @@ export function Timer({ seconds, isRunning, onTimeUp, className }: TimerProps) {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          onTimeUp();
           return 0;
         }
         return prev - 1;
@@ -31,7 +30,13 @@ export function Timer({ seconds, isRunning, onTimeUp, className }: TimerProps) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isRunning, onTimeUp]);
+  }, [isRunning]);
+
+  useEffect(() => {
+    if (timeLeft === 0 && isRunning) {
+      onTimeUp();
+    }
+  }, [timeLeft, isRunning, onTimeUp]);
 
   const percentage = (timeLeft / seconds) * 100;
   const isLow = percentage <= 30;

@@ -4,7 +4,7 @@ interface ProgressBarProps {
   value: number;
   max?: number;
   showLabel?: boolean;
-  variant?: "primary" | "success" | "warning" | "gold";
+  variant?: "primary" | "success" | "warning" | "gold" | "destructive";
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -14,6 +14,7 @@ const variantClasses = {
   success: "bg-success",
   warning: "bg-warning",
   gold: "gradient-gold",
+  destructive: "bg-destructive"
 };
 
 const sizeClasses = {

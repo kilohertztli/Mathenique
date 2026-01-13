@@ -26,7 +26,7 @@ export function StatCard({ title, value, icon: Icon, trend, className }: StatCar
           <span
             className={cn(
               "text-sm font-semibold",
-              trend === "up" && "text-success",
+              trend === "up" && "text-warning",
               trend === "down" && "text-destructive",
               trend === "neutral" && "text-muted-foreground"
             )}

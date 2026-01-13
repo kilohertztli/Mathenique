@@ -83,7 +83,7 @@ export function QuestionCard({ question, onAnswer, disabled }: QuestionCardProps
       {/* Submit Button */}
       <div className="flex justify-center">
         <GameButton
-          variant="success"
+          variant="primary"
           size="lg"
           onClick={handleSubmit}
           disabled={selectedAnswer === null || showResult || disabled}

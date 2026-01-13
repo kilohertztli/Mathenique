@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { GameButton } from "@/components/ui/GameButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator, Sparkles } from "lucide-react";
+import { DraftingCompass } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Auth() {
@@ -37,9 +37,10 @@ export default function Auth() {
           return;
         }
         const success = await register(name, email, password);
+
         if (success) {
-          toast.success("Account created! Let's start learning!");
-          navigate("/lessons");
+          toast.success("Account created! Log in to start your Mathenique adventure!");
+          setIsLogin(true);
         } else {
           toast.error("Email already exists");
         }
@@ -67,13 +68,11 @@ export default function Auth() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl gradient-primary mb-4 float">
-            <Calculator className="w-10 h-10 text-primary-foreground" />
+            <DraftingCompass className="w-10 h-10 text-primary-foreground" />
           </div>
-          <h1 className="text-4xl font-fredoka font-bold text-foreground">MathQuest</h1>
+          <h1 className="text-4xl font-fredoka font-bold text-foreground">Mathenique</h1>
           <p className="text-muted-foreground mt-2 flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4" />
-            Learn math through adventure
-            <Sparkles className="w-4 h-4" />
+            Be skillful. Be Mathenique.
           </p>
         </div>
 
@@ -167,7 +166,7 @@ export default function Auth() {
           {/* Demo Account */}
           <div className="mt-6 pt-6 border-t border-primary/10 text-center">
             <p className="text-sm text-muted-foreground">
-              Demo: Register with any email to try the game!
+              
             </p>
           </div>
         </div>

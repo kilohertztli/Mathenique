@@ -4,6 +4,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
 
+/* Custom font */
+@font-face {
+  font-family: 'Zenless';
+  src: url('/fonts/zenless.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 48 100% 88%;

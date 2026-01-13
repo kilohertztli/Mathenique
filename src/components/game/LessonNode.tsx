@@ -7,6 +7,7 @@ export interface LessonNodeProps {
   isLocked: boolean;
   isCompleted: boolean;
   isCurrent: boolean;
+  isPerfect: boolean;
   stars?: number;
   onClick?: () => void;
 }
@@ -16,6 +17,7 @@ export function LessonNode({
   isLocked,
   isCompleted,
   isCurrent,
+  isPerfect,
   stars = 0,
   onClick,
 }: LessonNodeProps) {
@@ -25,16 +27,17 @@ export function LessonNode({
       disabled={isLocked}
       className={cn(
         "relative flex flex-col items-center transition-all duration-300",
-        isLocked ? "cursor-not-allowed opacity-70" : "cursor-pointer hover:scale-105",
         isCurrent && "scale-110"
       )}
     >
+
       {/* Node Circle */}
       <div
         className={cn(
           "w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border-4 transition-all duration-300",
           isLocked && "bg-locked border-muted",
-          isCompleted && "bg-success border-success/50",
+          isCompleted && "bg-primary border-primary/50",
+          isPerfect && "bg-warning border-warning/50",
           isCurrent && !isCompleted && "bg-primary border-primary/50 pulse-glow",
           !isLocked && !isCompleted && !isCurrent && "bg-card border-primary/30"
         )}

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import api from "../api/axios";
 
 interface User {
   id: string;
@@ -20,69 +21,69 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
-    // Check for existing session
-    const storedUser = localStorage.getItem("mathquest_user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    const validateSession = async () => {
+      const token = localStorage.getItem("mathquest_token");
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const res = await api.get("/me");
+        setUser(res.data);
+      } catch {
+        logout();
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    validateSession();
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulate API call - In production, this would connect to a real backend
-    const users = JSON.parse(localStorage.getItem("mathquest_users") || "[]");
-    const foundUser = users.find((u: any) => u.email === email && u.password === password);
-    
-    if (foundUser) {
-      const userData = { id: foundUser.id, email: foundUser.email, name: foundUser.name };
-      setUser(userData);
-      localStorage.setItem("mathquest_user", JSON.stringify(userData));
-      return true;
-    }
-    return false;
-  };
 
-  const register = async (name: string, email: string, password: string): Promise<boolean> => {
-    // Simulate API call
-    const users = JSON.parse(localStorage.getItem("mathquest_users") || "[]");
-    
-    if (users.find((u: any) => u.email === email)) {
-      return false; // User already exists
-    }
+  const login = async (email: string, password: string) => {
+    const params = new URLSearchParams();
+    params.append("username", email);
+    params.append("password", password);
 
-    const newUser = {
-      id: crypto.randomUUID(),
-      name,
-      email,
-      password,
-    };
-    
-    users.push(newUser);
-    localStorage.setItem("mathquest_users", JSON.stringify(users));
-    
-    const userData = { id: newUser.id, email: newUser.email, name: newUser.name };
-    setUser(userData);
-    localStorage.setItem("mathquest_user", JSON.stringify(userData));
-    
-    // Initialize user progress
-    localStorage.setItem(`mathquest_progress_${newUser.id}`, JSON.stringify({
-      completedLessons: [],
-      currentLesson: 1,
-      stats: {
-        totalQuestions: 0,
-        correctAnswers: 0,
-        gamesPlayed: 0,
-        bestStreak: 0,
-      }
-    }));
-    
+    const res = await api.post("/login", params);
+    localStorage.setItem("mathquest_token", res.data.access_token);
+
+    const me = await api.get("/me");
+    setUser(me.data);
+
     return true;
   };
 
+
   const logout = () => {
+    localStorage.removeItem("mathquest_token");
     setUser(null);
-    localStorage.removeItem("mathquest_user");
+  };
+
+
+  const register = async (
+    name: string,
+    email: string,
+    password: string
+  ): Promise<boolean> => {
+    try {
+      await api.post("/register", {
+        name,
+        email,
+        password,
+      });
+
+      return true;
+    } catch (err: any) {
+      if (err.response?.status === 409) {
+        return false;
+      }
+      throw err;
+    }
   };
 
   return (

@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         fredoka: ["Fredoka", "sans-serif"],
         nunito: ["Nunito", "sans-serif"],
+        custom: ["Zenless", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,12 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { BookOpen, Gamepad2, BarChart3, LogOut, User } from "lucide-react";
+import { BookOpen, Swords, Flag, LogOut, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
-  { path: "/lessons", label: "Lessons", icon: BookOpen },
-  { path: "/play", label: "Play", icon: Gamepad2 },
-  { path: "/progress", label: "Progress", icon: BarChart3 },
+  { path: "/lessons", label: "Adventure", icon: Flag },
+  { path: "/play", label: "Arena", icon: Swords },
+  { path: "/progress", label: "Progress", icon: BookOpen },
 ];
 
 export function Navigation() {
@@ -23,7 +23,7 @@ export function Navigation() {
               <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-fredoka font-bold text-xl">M</span>
               </div>
-              <span className="font-fredoka font-bold text-xl text-foreground">MathQuest</span>
+              <span className="font-fredoka font-bold text-xl text-foreground">Mathenique</span>
             </Link>
 
             {/* Navigation Items */}
